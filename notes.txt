@@ -1,0 +1,64 @@
+Here's all the important information from this SQL code:
+
+Database Name
+- `vulnapi`
+
+Table: users (authentication table)
+- Columns: id, name, email, password, role, created_at, updated_at
+- Password storage: Uses `password_hash()` format (bcrypt hashes)
+
+User Credentials (Sample Data)
+
+Admin User:
+- Name: `Admin User`
+- Email: `admin@vulnapi.com`
+- Password: `admin123`
+- Role: `admin`
+
+Regular Users (all use same password):
+- Password for ALL regular users: `password123`
+- Hash: `$2y$10$CUrj1TDtImeYrCByU8jwPOE9VPRo0RjCQBRz.b/0tGy5U2/a.c.bG`
+
+Regular Users List:
+1. Name: `Alice Johnson` | Email: `alice@example.com`
+2. Name: `Bob Smith` | Email: `bob@example.com`
+3. Name: `Charlie Brown` | Email: `charlie@example.com`
+
+Table: notes (contains sensitive data)
+Sample notes with sensitive information:
+
+Bob's notes (user_id 3):
+- "Bob's Bank Account": Account number `12345678`, Routing `987654321`
+- "Bob's Passwords": Email password `password123`, Bank password `mybankpassword`
+
+Alice's notes (user_id 2):
+- "Alice's Shopping List": Milk, Eggs, Bread, Butter
+- "Alice's Secret Diary": mentions SQL injection
+
+Admin note (user_id 1):
+- "Admin Note": super secret admin note
+
+Application Database User
+- Username: `vulnapi_user`
+- Password: `StrongPassword123!`
+- Host: `localhost`
+- Privileges: ALL on vulnapi database
+
+Security Issues Noted:
+1. Passwords stored as comments in plain text (`admin123`, `password123`)
+2. Sensitive data in note bodies (bank account, passwords)
+
+This is a deliberately vulnerable API/database for security testing/learning purposes.
+
+
+To use the app:
+
+1. Open Git Bash (not PowerShell)
+2. Make scripts executable:
+    cd /c/Users/Olamide/Desktop/vulnapi/scripts
+    chmod +x *.sh
+3. Start the server (in one terminal):
+    ./start-app.sh   
+4. In another terminal, run the tests:
+    cd /c/Users/Olamide/Desktop/vulnapi/scripts
+    ./test-all-vulns.sh
